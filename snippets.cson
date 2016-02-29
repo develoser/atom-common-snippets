@@ -55,6 +55,19 @@
 
     })();
     """
+  'module.singleton.new':
+    'prefix': 'module.singleton.new'
+    'body': """
+    (function () {
+
+        'use strict';
+
+        module.exports = {
+            $1
+        };
+
+    })();
+    """
   'module.class.new':
     'prefix': 'module.class.new'
     'body': """
@@ -78,8 +91,12 @@
         'use strict';
 
         let locator = require('./$1.locator'),
-            BaseComponent = require('/common/components/base.component');
+            BaseComponent = require('../../../../common/components/base.component');
 
+        /**
+         * @classdesc $3
+         * @extends Component
+         */
         class $2 extends BaseComponent {
 
             constructor(options) {
@@ -128,4 +145,9 @@
     'prefix': 'this.el.element'
     'body': """
     return this.$el.element(by.css(locator.$1));
+    """
+  'pageobject.getcomp':
+    'prefix': 'pageobject.getcomp'
+    'body': """
+    DashboardPageObject.getComponent('$1');
     """
